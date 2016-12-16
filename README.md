@@ -24,6 +24,7 @@ So as you can see initializer returns promise;
 ## Initializer file path and structure
 Your app root folder should contain "initializers" folder with initializers files (name of file irrelevant).
 initializer.js:
+
     'use strict';
  
     module.exports = {
