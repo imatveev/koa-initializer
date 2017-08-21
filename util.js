@@ -55,5 +55,11 @@ module.exports = {
                 }
             });
         });
+    },
+
+    sortByPriority(prev, next) {
+        let prevPriority = prev.priority || prev.default.priority;
+        let nextPriority = next.priority || next.default.priority;
+        return nextPriority - prevPriority;
     }
 };
