@@ -6,7 +6,7 @@ const mkdirp = require('mkdirp');
 module.exports = {
 
     filterIndex(file) {
-        return file !== 'index.js';
+        return file !== 'index.js' && !~file.indexOf('.map');
     },
 
     readdirAsync(path) {
