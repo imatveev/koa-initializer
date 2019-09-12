@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 export default (app, path = `${__dirname}/../../initializers`) => {
     return util.readdirAsync(path)
         .then(initializers => {
-            return Promise.all([initializers[0], initializers[1]]
+            return Promise.all(initializers
                 .filter(util.filterIndex)
                 .map(fileName => {
                     const relPath = pathLib.relative(__dirname, path + `/${fileName}`)
