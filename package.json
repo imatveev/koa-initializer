@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "name": "koa-initializer",
-  "version": "2.0.1",
+  "version": "3.0.1",
   "description": "Module for generating and handling initializers of your application",
   "main": "index.js",
   "scripts": {
@@ -9,6 +10,7 @@
   "author": "ivan_matvieiev@globallogic.com",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^12.7.5",
     "mkdirp": "^0.5.1"
   }
 }
