@@ -1,9 +1,8 @@
 'use strict';
+import fs from 'fs';
+import mkdirp from 'mkdirp';
 
-const fs     = require('fs');
-const mkdirp = require('mkdirp');
-
-module.exports = {
+export default {
 
     filterIndex(file) {
         return file !== 'index.js' && !~file.indexOf('.map');

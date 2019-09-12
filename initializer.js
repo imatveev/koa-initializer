@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
     priority: 1000,
     execute(app) {
         return new Promise((resolve, reject) => {

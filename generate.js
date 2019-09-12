@@ -1,9 +1,9 @@
 'use strict';
 
-const readline = require('readline');
-const util     = require('./util');
+import readline from 'readline';
+import util from './util';
 
-var rl = readline.createInterface({
+const rl = readline.createInterface({
   input:    process.stdin,
   output:   process.stdout,
   terminal: false

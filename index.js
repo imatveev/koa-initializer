@@ -1,23 +1,30 @@
 'use strict';
 
-const util = require('./util');
+import util from'./util.js';
+import pathLib, { dirname } from 'path';
+import { fileURLToPath } from "url";
 
-module.exports = (app, path = `${__dirname}/../../initializers`) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default (app, path = `${__dirname}/../../initializers`) => {
     return util.readdirAsync(path)
-    .then(initializers => {
-        return initializers
-        .filter(util.filterIndex)
-        .map(fileName => {
-            let file = require(`${path}/${fileName}`);
-            return file;
-        })
-        .sort(util.sortByPriority)
-        .reduce((promise, initializer) => {
-            return promise
-            .then(() => {
-                let execute = initializer.execute || initializer.default.execute;
-                return execute(app)
-            });
-        }, Promise.resolve());
-    });
+        .then(initializers => {
+            return Promise.all([initializers[0], initializers[1]]
+                .filter(util.filterIndex)
+                .map(fileName => {
+                    const relPath = pathLib.relative(__dirname, path + `/${fileName}`)
+                        .replace(/\\/g, '/');
+                    return import(relPath)
+                })).then(files => {
+                     return files.sort(util.sortByPriority)
+                         .reduce((promise, initializer) => {
+                              return promise
+                                  .then(() => {
+                                      let execute = initializer.execute || initializer.default.execute;
+                                      return execute(app)
+                                   });
+                         }, Promise.resolve());
+                })
+        });
 };
