@@ -28,7 +28,7 @@ initializer.js:
     'use strict';
  
     module.exports = {
-        priority: 800, // Any diapason (bigger number - lower priority)
+        priority: 800, // Any diapason (bigger number - higher priority, so 1000 goes before 800)
         execute(app) { // Executable function (takes app as parameter)
             //Any synchronous/asynchronous code (asynchronous must return promise)
         }
