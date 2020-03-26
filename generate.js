@@ -2,6 +2,7 @@
 
 const readline = require('readline');
 const util     = require('./util');
+const mkdir    = require('mkdirp');
 
 var rl = readline.createInterface({
   input:    process.stdin,
@@ -9,17 +10,12 @@ var rl = readline.createInterface({
   terminal: false
 });
 
-rl.question('Initializer name:', name => {
-    util.mkdir('../../initializers')
-    .then(() => {
-        if (!/\.js$/.test(name)) {
-            name = `${name}.js`
-        }
-        return util.createInitializer(name);
-    })
-    .then(() => {
-        console.log('Initializer created');
-    })
-    .catch(err => console.error(err))
+rl.question('Initializer name:', async name => {
+    await mkdir('../../initializers');
+    if (!/\.js$/.test(name)) {
+        name = `${name}.js`
+    }
+    await util.createInitializer(name);
+    console.log('Initializer created');
     rl.close();
 });

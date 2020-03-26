@@ -1,7 +1,6 @@
 'use strict';
 
-const fs     = require('fs');
-const mkdirp = require('mkdirp');
+const fs = require('fs').promises;
 
 module.exports = {
 
@@ -9,52 +8,17 @@ module.exports = {
         return file !== 'index.js' && !~file.indexOf('.map');
     },
 
-    readdirAsync(path) {
-        return new Promise((resolve, reject) => {
-            fs.readdir(path, (error, files) => {
-                if(error) {
-                    return reject(error);
-                }
-                resolve(files);
-            })
-        })
-    },
-
     filterByPriority(prev, next) {
         return prev.priority > next.priority
     },
 
-    mkdir(name) {
-        return new Promise((resolve, reject) => {
-            mkdirp(name, error => {
-                if(error) {
-                    return reject(error);
-                }
-                resolve();
-            });
-        })
-    },
-
     get template() {
-        return new Promise((resolve, reject) => {
-            fs.readFile('./initializer.js', 'utf-8', (error, initializer) => {
-                if(error) {
-                    return reject(error);
-                }
-                resolve(initializer);
-            })
-        })
+        return fs.readFile('./initializer.js', 'utf-8');
     },
 
-    createInitializer(name) {
-        this.template
-        .then(data => {
-            fs.writeFile(`${__dirname}/../../initializers/${name}`, data, error => {
-                if(error) {
-                    throw error;
-                }
-            });
-        });
+    async createInitializer(name) {
+        const template = await this.template;
+        await fs.writeFile(`${__dirname}/../../initializers/${name}`, template)
     },
 
     sortByPriority(prev, next) {

@@ -1,14 +1,19 @@
 {
   "name": "koa-initializer",
-  "version": "3.0.2",
-  "description": "Module for generating and handling initializers of your application",
+  "version": "4.0.0",
+  "description": "Module for generating and handling initializers of your koa application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha",
+    "generate": "node generate"
   },
   "author": "ivan_matvieiev@globallogic.com",
   "license": "MIT",
   "dependencies": {
-    "mkdirp": "^0.5.1"
+    "mkdirp": "^1.0.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.1"
   }
 }
