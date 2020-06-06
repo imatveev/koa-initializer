@@ -10,10 +10,10 @@
   "author": "ivan_matvieiev@globallogic.com",
   "license": "MIT",
   "dependencies": {
-    "mkdirp": "^1.0.3"
+    "mkdirp": "^1.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.1"
+    "mocha": "^7.2.0"
   }
 }
