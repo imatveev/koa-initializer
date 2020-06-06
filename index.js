@@ -5,7 +5,6 @@ const fs   = require('fs').promises;
 
 module.exports = async (app, path = `${__dirname}/../../initializers`) => {
     const initializers = await fs.readdir(path);
-    console.log(initializers)
     const preparedInitializers = initializers
     .filter(util.filterIndex)
     .map(fileName => {
@@ -13,10 +12,8 @@ module.exports = async (app, path = `${__dirname}/../../initializers`) => {
         return file;
     })
     .sort(util.sortByPriority);
-    console.log(preparedInitializers)
     for (const initializer of preparedInitializers) {
         let execute = initializer.execute || initializer.default.execute;
-        // console.log('EXECUTING')
         await execute(app);
     }
 };
